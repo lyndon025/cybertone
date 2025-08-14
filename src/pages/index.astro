@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import ParallaxBackground from '../components/ParallaxBackground.astro';
 import ScrollToTop from '../components/ScrollToTop.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
-
+import GalleryLightbox from "../components/GalleryLightbox.astro";
 
 // Editable targets
 const COMPANY = {
@@ -30,6 +30,13 @@ const ABOUT_PHOTOS = [
   '/about/about-2.avif',
   '/about/about-3.avif',
   '/about/about-4.avif',
+];
+
+const gallery = [
+  { src: "/about/about-1.avif"},
+  { src: "/about/about-2.avif"},
+  { src: "/about/about-3.avif"},
+  { src: "/about/about-4.avif"},
 ];
 
 // Product gallery photos (8 items) — converted to AVIF
@@ -312,77 +319,33 @@ const LOCATION_PHOTO = 'about/location-3.avif';
         </aside>
       </div>
 
-      <!-- ROW 2: About Photos (clickable AVIF) -->
-      <section class="mt-4 animate-slide-up">
-        <h3 class="text-2xl font-semibold mb-4 font-poppins">Gallery</h3>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {
-            ABOUT_PHOTOS.map((src, idx) => (
-              <img
-                src={src}
-                alt={`About photo ${idx + 1}`}
-                class="rounded-lg object-cover h-40 md:h-48 w-full shadow cursor-zoom-in js-lightbox"
-                data-full={src}
-                loading="lazy"
-                width="640"
-                height="480"
-              />
-            ))
-          }
-        </div>
-      </section>
+     <!-- ROW 2: About Photos (clickable AVIF) -->
+<section class="mt-4">
+  <h3 class="text-2xl font-semibold mb-4 font-poppins">Gallery</h3>
 
-      <!-- ROW 4: Services -->
-      <section
-        id="services"
-        class="animate-slide-up mt-8 bg-gradient-to-br from-blue-900 to-blue-700/80 dark:from-blue-800/80 dark:to-indigo-900 rounded-lg p-6 md:p-8 shadow-xl"
-      >
-        <h2 class="text-3xl font-bold mb-6 text-white font-poppins">
-          Our Services, Products, and Details
-        </h2>
-        <div
-          class="grid md:grid-cols-2 gap-4 md:gap-6 max-h-[520px] overflow-y-auto pr-2 slim-scroll"
-        >
-          <div
-            class="bg-white/10 backdrop-blur-sm p-5 rounded-lg shadow hover:bg-white/15 transition"
-          >
-            <h3 class="text-xl font-semibold text-white mb-2">Molded Rubber Products</h3>
-            <p class="text-white">
-              O‑rings, gaskets, bumpers, bushings, washers, strips, sheets, seals, suction cups,
-              diaphragms, etc. — custom‑made to spec.
-            </p>
-          </div>
-          <div
-            class="bg-white/10 backdrop-blur-sm p-5 rounded-lg shadow hover:bg-white/15 transition"
-          >
-            <h3 class="text-xl font-semibold text-white mb-2">Custom Fabrication</h3>
-            <p class="text-white">
-              We fabricate per your drawing/sample for precise fit with your machines and production
-              lines.
-            </p>
-          </div>
-          <div
-            class="bg-white/10 backdrop-blur-sm p-5 rounded-lg shadow hover:bg-white/15 transition"
-          >
-            <h3 class="text-xl font-semibold text-white mb-2">Industries Served</h3>
-            <p class="text-white">
-              Automotive, Food & Beverages, Printing, Engineering, Mechanical, Factory/Plant,
-              Railway, and more.
-            </p>
-          </div>
-          <div
-            class="bg-white/10 backdrop-blur-sm p-5 rounded-lg shadow hover:bg-white/15 transition"
-          >
-            <h3 class="text-xl font-semibold text-white mb-2">Lead Times & Orders</h3>
-            <p class="text-white">
-              Typical lead time 10–15 days (varies). No minimum order; better pricing for bulk &
-              repeat orders.
-            </p>
-          </div>
-        </div>
-      </section>
+  <!-- stretch grid edge-to-edge inside the page container -->
+  <div class="mx-[-1rem] sm:mx-[-1.5rem] md:mx-[-2rem]">
+    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4  gap-1 sm:gap-2 md:gap-3 px-4 sm:px-6 md:px-8">
+      {
+        ABOUT_PHOTOS.map((src, idx) => (
+          <img
+            src={src}
+            alt={`About photo ${idx + 1}`}
+            class="rounded-lg object-cover aspect-[4/3] w-full shadow cursor-zoom-in js-lightbox"
+            data-full={src}
+            data-index={idx}
+            loading="lazy"
+            width="640"
+            height="480"
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
 
-      <!-- ROW 5: Location / Map -->
+
+
       <!-- ROW 5: Location / Map -->
       <section id="location" class="animate-slide-up mt-8">
         <h3 class="text-2xl font-semibold font-poppins mb-4">Location / Map</h3>
@@ -573,69 +536,130 @@ const LOCATION_PHOTO = 'about/location-3.avif';
 
 <!-- Lightweight Lightbox (no deps) -->
 <style>
-  .slim-scroll::-webkit-scrollbar {
-    width: 8px;
-  }
-  .slim-scroll::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.15);
-    border-radius: 9999px;
-  }
-  .dark .slim-scroll::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-  }
+  .slim-scroll::-webkit-scrollbar { width: 8px; }
+  .slim-scroll::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.15); border-radius: 9999px; }
+  .dark .slim-scroll::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); }
 
   .lb-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.8);
     display: none;
     align-items: center;
     justify-content: center;
     z-index: 60;
   }
-  .lb-backdrop.open {
-    display: flex;
-  }
+  .lb-backdrop.open { display: flex; }
+
   .lb-img {
     max-width: 92vw;
     max-height: 92vh;
     border-radius: 0.5rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   }
+  /* zoom-in on open */
+  .lb-backdrop.open .lb-img { animation: lb-zoom 160ms ease-out; }
+  @keyframes lb-zoom {
+    from { transform: scale(0.96); opacity: 0.8; }
+    to   { transform: scale(1);    opacity: 1; }
+  }
+
+  /* controls */
+  .lb-btn {
+    position: absolute;
+    top: 1rem;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    padding: .5rem .75rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+  }
+  .lb-close { right: 1rem; font-size: 1.25rem; line-height: 1; }
+  .lb-arrow {
+    top: 50%;
+    transform: translateY(-50%);
+    padding: .6rem .8rem;
+    font-size: 1.1rem;
+  }
+  .lb-prev { left: 1rem; }
+  .lb-next { right: 1rem; }
 </style>
 
 <div id="lightbox" class="lb-backdrop" aria-hidden="true">
+  <button class="lb-btn lb-close" aria-label="Close (Esc)">✕</button>
+  <button class="lb-btn lb-arrow lb-prev" aria-label="Previous (←)">◀</button>
   <img class="lb-img" src="" alt="Preview" />
+  <button class="lb-btn lb-arrow lb-next" aria-label="Next (→)">▶</button>
 </div>
+
 
 <script>
   const lb = document.getElementById('lightbox');
   const lbImg = lb?.querySelector('.lb-img');
+  const btnClose = lb?.querySelector('.lb-close');
+  const btnPrev = lb?.querySelector('.lb-prev');
+  const btnNext = lb?.querySelector('.lb-next');
 
-  const openLB = (src) => {
-    if (!lb || !lbImg) return;
-    lbImg.src = src;
-    lb.classList.add('open');
-    lb.setAttribute('aria-hidden', 'false');
-  };
-  const closeLB = () => {
+  // All clickable thumbnails
+  const thumbs = Array.from(document.querySelectorAll('.js-lightbox'));
+  let currentIndex = -1;
+
+  function openAt(idx) {
+    if (!thumbs.length || !lb || !lbImg) return;
+    currentIndex = ((idx % thumbs.length) + thumbs.length) % thumbs.length;
+    const src = thumbs[currentIndex].getAttribute('data-full') || thumbs[currentIndex].getAttribute('src');
+    if (!src) return;
+
+    // Preload then reveal (lets the zoom animation feel smooth)
+    const pre = new Image();
+    pre.onload = () => {
+      lbImg.src = src;
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.documentElement.style.overflow = 'hidden';
+    };
+    pre.src = src;
+  }
+
+  function closeLB() {
     if (!lb || !lbImg) return;
     lb.classList.remove('open');
     lb.setAttribute('aria-hidden', 'true');
     lbImg.src = '';
-  };
+    document.documentElement.style.overflow = '';
+    currentIndex = -1;
+  }
 
+  function next() { if (currentIndex > -1) openAt(currentIndex + 1); }
+  function prev() { if (currentIndex > -1) openAt(currentIndex - 1); }
+
+  // Open when clicking a gallery image
   document.addEventListener('click', (e) => {
     const t = e.target;
     if (t && t.classList && t.classList.contains('js-lightbox')) {
-      const src = t.getAttribute('data-full') || t.getAttribute('src');
-      if (src) openLB(src);
+      const clickedIndex = thumbs.indexOf(t);
+      openAt(clickedIndex > -1 ? clickedIndex : 0);
     } else if (t === lb) {
+      // Click the dark backdrop to close
       closeLB();
     }
   });
 
+  // Click the enlarged photo to close (your requested behavior)
+  lbImg?.addEventListener('click', closeLB);
+
+  // Buttons
+  btnClose?.addEventListener('click', closeLB);
+  btnNext?.addEventListener('click', next);
+  btnPrev?.addEventListener('click', prev);
+
+  // Keyboard: Esc to close, ← → to navigate
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeLB();
+    if (!lb?.classList.contains('open')) return;
+    if (e.key === 'Escape') { e.preventDefault(); closeLB(); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
   });
 </script>

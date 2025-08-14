@@ -1,0 +1,123 @@
+
+const { images = [] } = Astro.props;
+---
+
+<section class="ct-gallery" aria-label="Photo gallery">
+  <!-- Responsive grid using Tailwind breakpoints -->
+  <div class="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+    {images.map((img, i) => (
+      <button
+        type="button"
+        class="group relative block rounded-xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-cyan-400 cursor-zoom-in"
+        aria-haspopup="dialog"
+        aria-label={`Open image ${i + 1} of ${images.length}`}
+        data-index={i}
+      >
+        <img
+          src={img.src}
+          alt={img.alt || `Photo ${i + 1}`}
+          loading="lazy"
+          decoding="async"
+          class="w-full h-full object-cover select-none pointer-events-none"
+          draggable="false"
+        />
+        <!-- subtle hover cue -->
+        <span class="absolute inset-0 ring-1 ring-black/5 group-hover:ring-black/20 transition"></span>
+      </button>
+    ))}
+  </div>
+
+  <!-- Lightbox -->
+  <div class="ct-lightbox fixed inset-0 z-[60]" data-open="false" role="dialog" aria-modal="true" aria-label="Image preview" hidden>
+    <div class="ct-backdrop absolute inset-0 bg-black/70 opacity-0 transition-opacity duration-200 ease-out"></div>
+    <figure class="absolute inset-0 grid place-items-center p-4 sm:p-8">
+      <img class="ct-image max-w-[92vw] max-h-[86vh] bg-black/90 rounded-xl shadow-2xl opacity-0 scale-95 transition duration-200 ease-out cursor-zoom-out" alt="" />
+      <figcaption class="mt-3 text-center text-gray-200 text-sm"></figcaption>
+
+      <button class="ct-close absolute top-3 right-3 px-3 py-2 rounded-lg border border-white/20 text-white bg-black/50 backdrop-blur-sm" aria-label="Close (Esc)" type="button">×</button>
+      <button class="ct-prev absolute top-1/2 -translate-y-1/2 left-3 px-3 py-2 rounded-lg border border-white/20 text-white bg-black/50 backdrop-blur-sm" aria-label="Previous (←)" type="button">‹</button>
+      <button class="ct-next absolute top-1/2 -translate-y-1/2 right-3 px-3 py-2 rounded-lg border border-white/20 text-white bg-black/50 backdrop-blur-sm" aria-label="Next (→)" type="button">›</button>
+    </figure>
+  </div>
+</section>
+
+<script is:inline>
+  const root = document.currentScript.closest('.ct-gallery');
+  const grid = root.querySelector('.grid');
+  const thumbs = Array.from(root.querySelectorAll('button[data-index]'));
+  const modal = root.querySelector('.ct-lightbox');
+  const imgEl = modal.querySelector('.ct-image');
+  const captionEl = modal.querySelector('figcaption');
+  const closeBtn = modal.querySelector('.ct-close');
+  const prevBtn = modal.querySelector('.ct-prev');
+  const nextBtn = modal.querySelector('.ct-next');
+  let i = 0;
+
+  // Build list from rendered thumbs (ensures the same srcs are used)
+  const images = thumbs.map(btn => {
+    const img = btn.querySelector('img');
+    return { src: img.currentSrc || img.src, alt: img.alt };
+  });
+
+  function openAt(idx) {
+    if (!images.length) return;
+    i = ((idx % images.length) + images.length) % images.length;
+    const { src, alt } = images[i];
+
+    // preload, then show
+    const pre = new Image();
+    pre.onload = () => {
+      imgEl.src = src;
+      imgEl.alt = alt || '';
+      captionEl.textContent = alt || '';
+      modal.hidden = false;
+      // “zoom in” animation: opacity + scale handled by CSS classes below
+      requestAnimationFrame(() => {
+        modal.dataset.open = 'true';
+        modal.querySelector('.ct-backdrop').classList.add('opacity-100');
+        imgEl.classList.remove('opacity-0','scale-95');
+      });
+      document.documentElement.style.overflow = 'hidden';
+    };
+    pre.src = src;
+  }
+
+  function close() {
+    modal.dataset.open = 'false';
+    modal.querySelector('.ct-backdrop').classList.remove('opacity-100');
+    imgEl.classList.add('opacity-0','scale-95');
+    setTimeout(() => {
+      modal.hidden = true;
+      imgEl.removeAttribute('src');
+      document.documentElement.style.overflow = '';
+    }, 200);
+  }
+
+  function next() { openAt(i + 1); }
+  function prev() { openAt(i - 1); }
+
+  // Click to open
+  thumbs.forEach(btn => {
+    btn.addEventListener('click', () => openAt(parseInt(btn.dataset.index, 10)));
+  });
+
+  // Click to close: backdrop or image
+  modal.addEventListener('click', (e) => {
+    if (e.target.classList.contains('ct-backdrop') || e.target.classList.contains('ct-image')) {
+      close();
+    }
+  });
+
+  // Controls
+  closeBtn.addEventListener('click', close);
+  nextBtn.addEventListener('click', next);
+  prevBtn.addEventListener('click', prev);
+
+  // Keyboard: Esc, ←, →
+  window.addEventListener('keydown', (e) => {
+    if (modal.hidden) return;
+    if (e.key === 'Escape') { e.preventDefault(); close(); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+  });
+</script>
