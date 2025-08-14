@@ -1,4 +1,5 @@
 ---
+// src/layouts/Layout.astro
 import ThemeToggle from '../components/ThemeToggle.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 
@@ -11,13 +12,12 @@ interface Props {
 
 const {
   title,
-  description = "Professional business landing page built with Astro and Tailwind CSS. Fast, responsive, and customizable.",
+  description = "Cybertone Industrial Sales — Manufacturer & supplier of custom molded rubber products and metal fabrication.",
   image = "/preview.png",
   canonicalURL = Astro.url,
 } = Astro.props;
 
-// Construct meta data
-const siteTitle = "Servland - Business Landing Page";
+const siteTitle = "Cybertone Industrial Sales";
 const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
 ---
 
@@ -26,44 +26,39 @@ const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Primary Meta Tags -->
     <title>{fullTitle}</title>
     <meta name="title" content={fullTitle} />
     <meta name="description" content={description} />
-    <meta name="author" content="locobean" />
-    <meta name="keywords" content="business, landing page, astro, tailwind css, responsive design, dark mode, professional website" />
+    <meta name="author" content="Cybertone Industrial Sales" />
+    <meta name="keywords" content="molded rubber,O-rings,gaskets,bumpers,bushings,washers,strips,sheets,seals,custom rubber,metal fabrication,San Juan,Philippines" />
     <meta name="robots" content="index, follow" />
-    
-    <!-- Favicon -->
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    
-    <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
-    
-    <!-- Open Graph / Facebook -->
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(image, Astro.url)} />
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={fullTitle} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL(image, Astro.url)} />
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#4F46E5" />
-    
+    <meta name="theme-color" content="#0047AB" />
+
     <script is:inline>
       const theme = (() => {
         if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
@@ -80,7 +75,6 @@ const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
       } else {
         document.documentElement.classList.add('dark');
       }
-
       window.localStorage.setItem('theme', theme);
     </script>
   </head>
@@ -97,59 +91,39 @@ const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
 </html>
 
 <style is:global>
-  html {
-    scroll-behavior: smooth;
-  }
-
-  html.dark {
-    color-scheme: dark;
-  }
+  html { scroll-behavior: smooth; }
+  html.dark { color-scheme: dark; }
 
   :root {
-    --accent: 136, 58, 234;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
+    --accent: 0, 71, 171;
+    --accent-light: 0, 163, 255;
+    --accent-dark: 30, 58, 138;
     --accent-gradient: linear-gradient(
-      45deg,
-      rgb(var(--accent)),
-      rgb(var(--accent-light)) 30%,
-      white 60%
+      135deg, rgb(var(--accent)) 0%, rgb(var(--accent-light)) 50%, #2563eb 100%
     );
   }
 
   .container {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    width: 100%; margin-inline: auto; padding-inline: 1rem;
   }
+  @media (min-width: 640px) { .container { padding-inline: 1.5rem; } }
+  @media (min-width: 768px) { .container { padding-inline: 2rem; } }
+  @media (min-width: 1024px) { .container { max-width: 1024px; } }
+  @media (min-width: 1280px) { .container { max-width: 1280px; } }
 
-  @media (min-width: 640px) {
-    .container {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
+@media (min-width: 1536px) { /* 2xl */
+  .container {
+    max-width: 1440px; /* wider than default */
   }
+}
+@media (min-width: 1800px) { /* super-wide desktop */
+  .container {
+    max-width: 1600px;
+  }
+}
 
-  @media (min-width: 768px) {
-    .container {
-      padding-left: 2rem;
-      padding-right: 2rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .container {
-      max-width: 1024px;
-      padding-left: 2rem;
-      padding-right: 2rem;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .container {
-      max-width: 1280px;
-    }
-  }
+  /* nice slim scrollbar for scrollable service text */
+  .slim-scroll::-webkit-scrollbar { width: 8px; }
+  .slim-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 9999px; }
+  .dark .slim-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); }
 </style>
