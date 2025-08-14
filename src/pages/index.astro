@@ -59,52 +59,73 @@ const LOCATION_PHOTO = 'about/location-3.avif';
   <ParallaxBackground />
   <ScrollToTop />
 
-  <header
-    slot="header"
-    class="sticky top-0 z-50 bg-gradient-to-r from-brand-blue to-blue-600 dark:from-blue-800 dark:to-indigo-900 font-poppins w-full min-h-[52px] sm:min-h-[60px]"
-  >
-    <div class="absolute inset-0 bg-black/5 dark:bg-black/20 backdrop-blur-md"></div>
-    <nav class="container mx-auto px-4 py-2 sm:py-3 md:py-4 relative z-10">
-      <div class="flex justify-between items-center">
-        <a href="/" class="flex items-center gap-2">
-          <img
-            src={COMPANY.logo}
-            alt="Cybertone Industrial Sales"
-            class="h-7 w-7 sm:h-8 sm:w-8 rounded-md bg-white p-1 shadow object-contain"
-            width="32"
-            height="32"
-          />
-          <span class="text-sm sm:text-base md:text-lg font-semibold text-white">
-            {COMPANY.name}
-          </span>
+<header
+  slot="header"
+  class="sticky top-0 z-50 w-full bg-gradient-to-r from-brand-blue to-blue-600 dark:from-blue-800 dark:to-indigo-900 font-poppins"
+>
+  <div class="absolute inset-0 bg-black/5 dark:bg-black/20 backdrop-blur-md"></div>
+  <nav class="container mx-auto px-3 sm:px-4 py-2 sm:py-3 relative z-10 min-h-[48px]">
+    <div class="flex items-center justify-between gap-3">
+      <a href="/" class="flex items-center gap-2">
+        <img
+          src={COMPANY.logo}
+          alt="Cybertone Industrial Sales"
+          class="h-6 w-6 sm:h-8 sm:w-8 rounded-md bg-white p-1 shadow object-contain"
+          width="32" height="32"
+        />
+        <span class="text-[13px] sm:text-sm md:text-base font-semibold text-white">
+          {COMPANY.name}
+        </span>
+      </a>
+
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        <a
+          href={COMPANY.facebook}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors px-3 py-1.5 sm:px-4 sm:py-2"
+          aria-label="Visit Facebook Page"
+        >
+          <svg viewBox="0 0 24 24" class="h-4 w-4 sm:h-5 sm:w-5" fill="currentColor" aria-hidden="true">
+            <path d="M22 12.06C22 6.48 17.52 2 11.94 2S1.88 6.48 1.88 12.06c0 5.02 3.66 9.19 8.44 9.94v-7.03H7.9v-2.9h2.42v-2.22c0-2.4 1.43-3.73 3.63-3.73 1.05 0 2.16.19 2.16.19v2.38h-1.22c-1.2 0-1.57.75-1.57 1.52v1.86h2.67l-.43 2.9h-2.24V22c4.78-.75 8.44-4.92 8.44-9.94Z"/>
+          </svg>
+          <span class="hidden lg:inline text-sm lg:text-base">Facebook</span>
         </a>
 
-        <div class="flex items-center gap-2 sm:gap-3">
+        <a
+          href={COMPANY.messenger}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors px-3 py-1.5 sm:px-4 sm:py-2"
+          aria-label="Message us on Messenger"
+        >
+          <svg viewBox="0 0 24 24" class="h-4 w-4 sm:h-5 sm:w-5" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.29 2 2 6.02 2 11.63c0 2.9 1.17 5.5 3.1 7.36.16.16.24.39.2.62l-.33 2.1a.75.75 0 0 0 1.08.8l2.35-1.1c.2-.1.43-.1.64-.03 1.03.35 2.14.55 3.26.55 5.71 0 10-4.02 10-9.63C22 6.02 17.71 2 12 2Zm5.05 8.24-3.03 3.22a1.2 1.2 0 0 1-1.7.06l-1.76-1.58a.4.4 0 0 0-.55.02l-2.75 2.88a.75.75 0 0 1-1.1-1.02l3.03-3.23c.46-.49 1.23-.52 1.73-.09l1.75 1.58a.4.4 0 0 0 .57-.02l2.74-2.88a.75.75 0 0 1 1.07 1.06Z"/>
+          </svg>
+          <span class="hidden lg:inline text-sm lg:text-base">Messenger</span>
+        </a>
+
+        <a
+          href={`tel:${COMPANY.mobiles[0].tel}`}
+          class="inline-flex items-center gap-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors px-3 py-1.5 sm:px-5 sm:py-2"
+          aria-label={`Call ${COMPANY.mobiles[0].display}`}
+        >
+          <svg class="h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.69l1.5 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11.04 11.04 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.69.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/>
+          </svg>
+          <span class="hidden sm:inline text-sm md:text-base">Call {COMPANY.mobiles[0].display}</span>
+          <span class="sm:hidden text-[12px]">{COMPANY.mobiles[0].display}</span>
+        </a>
+
+        <div class="shrink-0 scale-90 sm:scale-100">
           <ThemeToggle />
-          <a
-            href={`tel:${COMPANY.mobiles[0].tel}`}
-            class="hover:opacity-80 transition-opacity flex items-center space-x-2 bg-white/10 rounded-full px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 hover:bg-white/20 text-white"
-          >
-            <svg
-              class="w-4 h-4 sm:w-5 sm:h-5 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-              ></path>
-            </svg>
-            <span class="hidden sm:inline text-sm md:text-base">Call {COMPANY.mobiles[0].display}</span>
-            <span class="sm:hidden text-xs">{COMPANY.mobiles[0].display}</span>
-          </a>
         </div>
       </div>
-    </nav>
-  </header>
+    </div>
+  </nav>
+</header>
+
 
   <main class="py-5 font-lato relative">
     <div class="container mx-auto px-4">
