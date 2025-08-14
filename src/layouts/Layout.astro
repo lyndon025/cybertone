@@ -25,7 +25,10 @@ const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- CHANGED: discourage zoom and double-tap zoom on mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
     <title>{fullTitle}</title>
     <meta name="title" content={fullTitle} />
     <meta name="description" content={description} />
@@ -103,27 +106,21 @@ const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
     );
   }
 
-  .container {
-    width: 100%; margin-inline: auto; padding-inline: 1rem;
-  }
+  .container { width: 100%; margin-inline: auto; padding-inline: 1rem; }
   @media (min-width: 640px) { .container { padding-inline: 1.5rem; } }
   @media (min-width: 768px) { .container { padding-inline: 2rem; } }
   @media (min-width: 1024px) { .container { max-width: 1024px; } }
   @media (min-width: 1280px) { .container { max-width: 1280px; } }
+  @media (min-width: 1536px) { .container { max-width: 1440px; } }
+  @media (min-width: 1800px) { .container { max-width: 1600px; } }
 
-@media (min-width: 1536px) { /* 2xl */
-  .container {
-    max-width: 1440px; /* wider than default */
-  }
-}
-@media (min-width: 1800px) { /* super-wide desktop */
-  .container {
-    max-width: 1600px;
-  }
-}
-
-  /* nice slim scrollbar for scrollable service text */
   .slim-scroll::-webkit-scrollbar { width: 8px; }
   .slim-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 9999px; }
   .dark .slim-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); }
+
+  /* NEW: reduce double-tap delay on interactive elements (helps avoid double-tap zoom) */
+  a, button { touch-action: manipulation; }
+
+  /* Optional: ensure text inputs don’t trigger zoom by keeping font-size ≥ 16px on iOS */
+  input, select, textarea { font-size: 16px; }
 </style>

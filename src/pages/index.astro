@@ -3,9 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import ParallaxBackground from '../components/ParallaxBackground.astro';
 import ScrollToTop from '../components/ScrollToTop.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
-import GalleryLightbox from "../components/GalleryLightbox.astro";
+import GalleryLightbox from '../components/GalleryLightbox.astro';
 
-// Editable targets
 const COMPANY = {
   name: 'Cybertone Industrial Sales',
   address: '175 J. Ruiz St., Brgy. Salapan, San Juan City',
@@ -21,10 +20,9 @@ const COMPANY = {
   facebook: 'https://fb.com/cybertoneindsales',
   messenger: 'https://m.me/cybertoneindsales',
   viberNumberE164: '+639174837739',
-  logo: '/cybertone-logo.avif', // put your AVIF logo in /public as this filename
+  logo: '/cybertone-logo.avif',
 };
 
-// About band photos (full-width) — converted to AVIF
 const ABOUT_PHOTOS = [
   '/about/about-1.avif',
   '/about/about-2.avif',
@@ -33,13 +31,12 @@ const ABOUT_PHOTOS = [
 ];
 
 const gallery = [
-  { src: "/about/about-1.avif"},
-  { src: "/about/about-2.avif"},
-  { src: "/about/about-3.avif"},
-  { src: "/about/about-4.avif"},
+  { src: '/about/about-1.avif' },
+  { src: '/about/about-2.avif' },
+  { src: '/about/about-3.avif' },
+  { src: '/about/about-4.avif' },
 ];
 
-// Product gallery photos (8 items) — converted to AVIF
 const PRODUCT_PHOTOS = [
   '/products/prod-1.avif',
   '/products/prod-2.avif',
@@ -51,7 +48,6 @@ const PRODUCT_PHOTOS = [
   '/products/prod-8.avif',
 ];
 
-// Location/Map preview image (AVIF). Drop a photo at this path.
 const LOCATION_PHOTO = 'about/location-3.avif';
 ---
 
@@ -63,34 +59,34 @@ const LOCATION_PHOTO = 'about/location-3.avif';
   <ParallaxBackground />
   <ScrollToTop />
 
-  <!-- Header -->
   <header
     slot="header"
-    class="sticky top-0 z-50 bg-gradient-to-r from-brand-blue to-blue-600 dark:from-blue-800 dark:to-indigo-900 font-poppins w-full"
+    class="sticky top-0 z-50 bg-gradient-to-r from-brand-blue to-blue-600 dark:from-blue-800 dark:to-indigo-900 font-poppins w-full min-h-[52px] sm:min-h-[60px]"
   >
     <div class="absolute inset-0 bg-black/5 dark:bg-black/20 backdrop-blur-md"></div>
-    <nav class="container mx-auto px-4 py-4 relative z-10">
+    <nav class="container mx-auto px-4 py-2 sm:py-3 md:py-4 relative z-10">
       <div class="flex justify-between items-center">
-        <!-- Logo -->
         <a href="/" class="flex items-center gap-2">
           <img
             src={COMPANY.logo}
             alt="Cybertone Industrial Sales"
-            class="h-8 w-8 rounded-md bg-white p-1 shadow object-contain"
+            class="h-7 w-7 sm:h-8 sm:w-8 rounded-md bg-white p-1 shadow object-contain"
             width="32"
             height="32"
           />
-          <span class="text-lg font-semibold text-white">{COMPANY.name}</span>
+          <span class="text-sm sm:text-base md:text-lg font-semibold text-white">
+            {COMPANY.name}
+          </span>
         </a>
 
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2 sm:gap-3">
           <ThemeToggle />
           <a
             href={`tel:${COMPANY.mobiles[0].tel}`}
-            class="hover:opacity-80 transition-opacity flex items-center space-x-2 bg-white/10 rounded-full px-4 sm:px-6 py-2 hover:bg-white/20 text-white"
+            class="hover:opacity-80 transition-opacity flex items-center space-x-2 bg-white/10 rounded-full px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 hover:bg-white/20 text-white"
           >
             <svg
-              class="w-6 h-6 sm:w-5 sm:h-5 text-white"
+              class="w-4 h-4 sm:w-5 sm:h-5 text-white"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -102,8 +98,8 @@ const LOCATION_PHOTO = 'about/location-3.avif';
                 d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
               ></path>
             </svg>
-            <span class="hidden sm:inline">Call {COMPANY.mobiles[0].display}</span>
-            <span class="sm:hidden text-sm">{COMPANY.mobiles[0].display}</span>
+            <span class="hidden sm:inline text-sm md:text-base">Call {COMPANY.mobiles[0].display}</span>
+            <span class="sm:hidden text-xs">{COMPANY.mobiles[0].display}</span>
           </a>
         </div>
       </div>
@@ -112,42 +108,37 @@ const LOCATION_PHOTO = 'about/location-3.avif';
 
   <main class="py-5 font-lato relative">
     <div class="container mx-auto px-4">
-      <!-- ROW 1 -->
       <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-3">
-        <!-- LEFT -->
         <section
-          class="animate-slide-up bg-white/80 dark:bg-gray-800/80 p-8 rounded-lg relative overflow-hidden shadow-xl"
+          class="animate-slide-up bg-white/80 dark:bg-gray-800/80 p-5 sm:p-7 md:p-8 rounded-lg relative overflow-hidden shadow-xl"
         >
           <div class="relative z-10 text-gray-800 dark:text-gray-200">
             <div class="flex items-start justify-between gap-4">
               <div>
-                <h1
-                  class="text-3xl md:text-4xl font-bold font-poppins text-brand-blue dark:text-white"
-                >
+                <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold font-poppins text-brand-blue dark:text-white">
                   Cybertone Industrial Sales
                 </h1>
-                <h2 class="text-lg md:text-xl font-semibold text-brand-blue/90 dark:text-white/90">
+                <h2 class="text-base sm:text-lg md:text-xl font-semibold text-brand-blue/90 dark:text-white/90">
                   Molded Rubber & Metal Fabrication
                 </h2>
               </div>
-              <!-- Small logo -->
               <img
                 src={COMPANY.logo}
                 alt="Cybertone logo"
-                class="w-20 h-20 md:w-20 md:h-20 mr-0 rounded bg-white p-1 shadow object-contain"
+                class="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 mr-0 rounded bg-white p-1 shadow object-contain"
                 width="80"
                 height="80"
               />
             </div>
 
-            <p class="text-base md:text-lg mt-2">
+            <p class="text-sm sm:text-base md:text-lg mt-2">
               O-rings, gaskets, bumpers, bushings, washers, strips, sheets, seals, and custom parts
               for automotive, engineering, factories, mechanical, printing, and more.
             </p>
 
-            <div class="mt-6">
-              <h3 class="text-2xl font-semibold mb-3">About Us</h3>
-              <ul class="space-y-3 leading-relaxed">
+            <div class="mt-5 sm:mt-6">
+              <h3 class="text-xl sm:text-2xl font-semibold mb-3">About Us</h3>
+              <ul class="space-y-2.5 sm:space-y-3 leading-relaxed text-sm sm:text-[15px] md:text-base">
                 <li class="flex gap-3">
                   <span class="mt-2 h-2 w-2 rounded-full bg-blue-600"></span>
                   Direct manufacturer & supplier of molded rubber products: O-rings, gaskets, bumpers,
@@ -162,7 +153,7 @@ const LOCATION_PHOTO = 'about/location-3.avif';
                   <span class="mt-2 h-2 w-2 rounded-full bg-blue-600"></span>
                   We also fabricate various metalworks per customer specifications for complete solutions.
                 </li>
-                <h3 class="text-2xl font-semibold mb-3">How to Order?</h3>
+                <h3 class="text-xl sm:text-2xl font-semibold mb-3">How to Order?</h3>
                 <li class="flex gap-3">
                   <span class="mt-2 h-2 w-2 rounded-full bg-blue-600"></span>
                   Send a sample, drawing, and/or description for quotation. No minimum order; lower costs
@@ -175,26 +166,25 @@ const LOCATION_PHOTO = 'about/location-3.avif';
                 </li>
               </ul>
 
-              <!-- About Section Buttons -->
-              <div class="mt-6 flex flex-wrap gap-3">
+              <div class="mt-5 sm:mt-6 flex flex-wrap gap-2.5 sm:gap-3">
                 <a
                   href={COMPANY.facebook}
                   target="_blank"
                   rel="noopener"
-                  class="inline-flex items-center bg-[#1877F2] hover:bg-[#166FE5] text-white font-semibold text-sm md:text-base px-4 py-2 rounded-md transition-colors shadow"
+                  class="inline-flex items-center bg-[#1877F2] hover:bg-[#166FE5] text-white font-semibold text-xs sm:text-sm md:text-base px-3 sm:px-4 py-1.5 sm:py-2 rounded-md transition-colors shadow"
                 >
                   Facebook Page
                 </a>
                 <a
                   href={`mailto:${COMPANY.emails[0]}?subject=Inquiry%20from%20Website`}
-                  class="inline-flex items-center bg-cyan-700 hover:bg-cyan-800 text-white font-semibold text-sm md:text-base px-4 py-2 rounded-md transition-colors shadow"
+                  class="inline-flex items-center bg-cyan-700 hover:bg-cyan-800 text-white font-semibold text-xs sm:text-sm md:text-base px-3 sm:px-4 py-1.5 sm:py-2 rounded-md transition-colors shadow"
                 >
                   Email Us
                 </a>
                 <a
                   href="/CIS Company Profile.pdf"
                   download
-                  class="inline-flex items-center bg-green-700 hover:bg-green-800 text-white font-semibold text-sm md:text-base px-4 py-2 rounded-md transition-colors shadow"
+                  class="inline-flex items-center bg-green-700 hover:bg-green-800 text-white font-semibold text-xs sm:text-sm md:text-base px-3 sm:px-4 py-1.5 sm:py-2 rounded-md transition-colors shadow"
                 >
                   Download Company Profile
                 </a>
@@ -203,14 +193,13 @@ const LOCATION_PHOTO = 'about/location-3.avif';
           </div>
         </section>
 
-        <!-- RIGHT -->
         <aside
-          class="animate-slide-up bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-xl p-6 md:p-4 space-y-6"
+          class="animate-slide-up bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-xl p-5 sm:p-6 md:p-4 space-y-6"
         >
           <div>
-            <h3 class="text-2xl font-semibold mb-4 dark:text-white flex items-center font-poppins">
+            <h3 class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 dark:text-white flex items-center font-poppins">
               <svg
-                class="w-7 h-7 mr-3 text-blue-600 dark:text-blue-400"
+                class="w-6 h-6 sm:w-7 sm:h-7 mr-2.5 sm:mr-3 text-blue-600 dark:text-blue-400"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -224,7 +213,7 @@ const LOCATION_PHOTO = 'about/location-3.avif';
               </svg>
               Contact
             </h3>
-            <ul class="space-y-2 text-sm">
+            <ul class="space-y-2 text-[13px] sm:text-sm">
               <li>
                 <span class="font-semibold">Address:</span>
                 {' '}
@@ -277,41 +266,41 @@ const LOCATION_PHOTO = 'about/location-3.avif';
             </ul>
             <a
               href={`mailto:${COMPANY.emails[0]}?subject=Inquiry%20from%20Website`}
-              class="mt-4 w-full inline-flex justify-center items-center bg-cyan-700 hover:bg-cyan-800 text-white font-semibold text-base py-3 px-4 rounded-md shadow transition-colors"
+              class="mt-4 w-full inline-flex justify-center items-center bg-cyan-700 hover:bg-cyan-800 text-white font-semibold text-sm sm:text-base py-2.5 sm:py-3 px-4 rounded-md shadow transition-colors"
             >
               Send Email
             </a>
           </div>
 
           <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
-            <h3 class="text-2xl font-semibold mb-3 dark:text-white flex items-center font-poppins">
-              <svg class="w-7 h-7 mr-3 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+            <h3 class="text-xl sm:text-2xl font-semibold mb-3 dark:text-white flex items-center font-poppins">
+              <svg class="w-6 h-6 sm:w-7 sm:h-7 mr-2.5 sm:mr-3 text-green-500" fill="currentColor" viewBox="0 0 24 24">
                 <path
                   d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654z"
                 ></path>
               </svg>
               Message Us
             </h3>
-            <p class="text-gray-600 dark:text-gray-400 mb-4">
+            <p class="text-gray-600 dark:text-gray-400 mb-4 text-[13px] sm:text-sm">
               Choose Messenger or Viber to DM us directly.
             </p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
               <a
                 href={COMPANY.messenger}
                 target="_blank"
                 rel="noopener"
-                class="flex items-center justify-center gap-2 bg-[#0084FF] hover:brightness-110 text-white font-semibold text-base py-3 px-4 rounded-md shadow transition"
+                class="flex items-center justify-center gap-2 bg-[#0084FF] hover:brightness-110 text-white font-semibold text-sm sm:text-base py-2.5 sm:py-3 px-4 rounded-md shadow transition"
               >
                 Messenger
               </a>
               <a
                 href={`viber://chat?number=${encodeURIComponent(COMPANY.viberNumberE164)}`}
-                class="flex items-center justify-center gap-2 bg-[#7360F2] hover:brightness-110 text-white font-semibold text-base py-3 px-4 rounded-md shadow transition"
+                class="flex items-center justify-center gap-2 bg-[#7360F2] hover:brightness-110 text-white font-semibold text-sm sm:text-base py-2.5 sm:py-3 px-4 rounded-md shadow transition"
               >
                 Viber
               </a>
             </div>
-            <p class="mt-4 text-xs text-gray-500">
+            <p class="mt-4 text-[11px] sm:text-xs text-gray-500">
               Tip: On desktop, Viber/Messenger links prompt to open the app. On mobile, they open
               the installed app directly.
             </p>
@@ -319,39 +308,34 @@ const LOCATION_PHOTO = 'about/location-3.avif';
         </aside>
       </div>
 
-     <!-- ROW 2: About Photos (clickable AVIF) -->
-<section class="mt-4">
-  <h3 class="text-2xl font-semibold mb-4 font-poppins">Gallery</h3>
+      <section class="mt-4">
+        <h3 class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 font-poppins">Gallery</h3>
+        <div class="mx-[-1rem] sm:mx-[-1.5rem] md:mx-[-2rem]">
+          <div
+            class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-1 sm:gap-2 md:gap-3 px-4 sm:px-6 md:px-8"
+          >
+            {
+              ABOUT_PHOTOS.map((src, idx) => (
+                <img
+                  src={src}
+                  alt={`About photo ${idx + 1}`}
+                  class="rounded-lg object-cover aspect-[4/3] w-full shadow cursor-zoom-in js-lightbox"
+                  data-full={src}
+                  data-index={idx}
+                  loading="lazy"
+                  width="640"
+                  height="480"
+                />
+              ))
+            }
+          </div>
+        </div>
+      </section>
 
-  <!-- stretch grid edge-to-edge inside the page container -->
-  <div class="mx-[-1rem] sm:mx-[-1.5rem] md:mx-[-2rem]">
-    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4  gap-1 sm:gap-2 md:gap-3 px-4 sm:px-6 md:px-8">
-      {
-        ABOUT_PHOTOS.map((src, idx) => (
-          <img
-            src={src}
-            alt={`About photo ${idx + 1}`}
-            class="rounded-lg object-cover aspect-[4/3] w-full shadow cursor-zoom-in js-lightbox"
-            data-full={src}
-            data-index={idx}
-            loading="lazy"
-            width="640"
-            height="480"
-          />
-        ))
-      }
-    </div>
-  </div>
-</section>
-
-
-
-      <!-- ROW 5: Location / Map -->
       <section id="location" class="animate-slide-up mt-8">
-        <h3 class="text-2xl font-semibold font-poppins mb-4">Location / Map</h3>
+        <h3 class="text-xl sm:text-2xl font-semibold font-poppins mb-3 sm:mb-4">Location / Map</h3>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-          <!-- LEFT: Photo -->
           <a
             href={COMPANY.mapsURL}
             target="_blank"
@@ -362,42 +346,37 @@ const LOCATION_PHOTO = 'about/location-3.avif';
             <img
               src={LOCATION_PHOTO}
               alt="Cybertone Industrial Sales storefront and surroundings"
-              class="w-full h-72 md:h-[420px] object-cover rounded-lg shadow-lg ring-1 ring-black/5 group-hover:opacity-95 transition"
+              class="w-full h-64 sm:h-72 md:h-[420px] object-cover rounded-lg shadow-lg ring-1 ring-black/5 group-hover:opacity-95 transition"
               loading="lazy"
               width="1280"
               height="720"
             />
           </a>
 
-          <!-- RIGHT: Address + Directions -->
-          <div
-            class="bg-white/80 dark:bg-gray-800/80 rounded-lg shadow-xl p-6 md:p-8 flex flex-col justify-between"
-          >
+          <div class="bg-white/80 dark:bg-gray-800/80 rounded-lg shadow-xl p-5 sm:p-6 md:p-8 flex flex-col justify-between">
             <div>
-              <p
-                class="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400 font-semibold mb-2"
-              >
+              <p class="text-[11px] sm:text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400 font-semibold mb-2">
                 Address
               </p>
               <a
                 href={COMPANY.mapsURL}
                 target="_blank"
                 rel="noopener"
-                class="text-lg font-semibold text-blue-700 dark:text-blue-300 hover:underline break-words"
+                class="text-base sm:text-lg font-semibold text-blue-700 dark:text-blue-300 hover:underline break-words"
               >
                 {COMPANY.address}
               </a>
 
-              <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">
+              <p class="mt-3 text-[13px] sm:text-sm text-gray-600 dark:text-gray-400">
                 Near J. Ruiz LRT‑2 Station (Along Aurora Blvd).
               </p>
-              <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">
+              <p class="mt-3 text-[13px] sm:text-sm text-gray-600 dark:text-gray-400">
                 Between SM Sta. Mesa and Robinsons Magnolia.
               </p>
 
-              <div class="mt-6">
-                <h4 class="text-base font-semibold mb-2 dark:text-white">Directions</h4>
-                <ul class="space-y-2 text-gray-700 dark:text-gray-300 leading-relaxed">
+              <div class="mt-5 sm:mt-6">
+                <h4 class="text-sm sm:text-base font-semibold mb-2 dark:text-white">Directions</h4>
+                <ul class="space-y-2 text-[13px] sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
                   <li class="flex gap-2">
                     <span class="mt-2 h-2 w-2 rounded-full bg-blue-600"></span>
                     From Cubao, turn right towards J. Ruiz.
@@ -410,12 +389,12 @@ const LOCATION_PHOTO = 'about/location-3.avif';
               </div>
             </div>
 
-            <div class="mt-6 flex flex-wrap gap-3">
+            <div class="mt-5 sm:mt-6 flex flex-wrap gap-2.5 sm:gap-3">
               <a
                 href={COMPANY.mapsURL}
                 target="_blank"
                 rel="noopener"
-                class="inline-flex items-center justify-center px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition shadow"
+                class="inline-flex items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2.5 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition shadow text-sm sm:text-base"
               >
                 Open in Google Maps
               </a>
@@ -423,7 +402,7 @@ const LOCATION_PHOTO = 'about/location-3.avif';
                 href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(COMPANY.address)}`}
                 target="_blank"
                 rel="noopener"
-                class="inline-flex items-center justify-center px-4 py-2 rounded-md bg-white text-blue-700 border border-blue-200 hover:bg-blue-50 dark:bg-gray-900 dark:text-blue-300 dark:border-blue-900 transition shadow"
+                class="inline-flex items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2.5 rounded-md bg-white text-blue-700 border border-blue-200 hover:bg-blue-50 dark:bg-gray-900 dark:text-blue-300 dark:border-blue-900 transition shadow text-sm sm:text-base"
               >
                 Get Driving Directions
               </a>
@@ -434,18 +413,13 @@ const LOCATION_PHOTO = 'about/location-3.avif';
     </div>
   </main>
 
-  <!-- Footer -->
   <footer
     slot="footer"
     class="mt-20 bg-gradient-to-r from-brand-blue to-blue-600 dark:from-blue-800 dark:to-indigo-900 text-white py-12 relative overflow-hidden"
   >
     <div class="absolute inset-0 overflow-hidden">
-      <div
-        class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full translate-x-1/2 -translate-y-1/2"
-      >
-      </div>
-      <div class="absolute bottom-0 left-1/4 w-48 h-48 bg-white/10 rounded-full -translate-y-1/2">
-      </div>
+      <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full translate-x-1/2 -translate-y-1/2"></div>
+      <div class="absolute bottom-0 left-1/4 w-48 h-48 bg-white/10 rounded-full -translate-y-1/2"></div>
     </div>
 
     <div class="container mx-auto px-4 relative z-10">
@@ -493,16 +467,12 @@ const LOCATION_PHOTO = 'about/location-3.avif';
                   d="M3 5a2 2 0 012-2h3.28l1.498 4.493-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257 4.493 1.498V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 ></path>
               </svg>
-              <a href={`tel:${COMPANY.landline.tel}`} class="hover:underline"
-                >{COMPANY.landline.display}</a
-              >
+              <a href={`tel:${COMPANY.landline.tel}`} class="hover:underline">{COMPANY.landline.display}</a>
             </li>
             {
               COMPANY.mobiles.map((m) => (
                 <li>
-                  <a class="hover:underline" href={`tel:${m.tel}`}>
-                    {m.display}
-                  </a>
+                  <a class="hover:underline" href={`tel:${m.tel}`}>{m.display}</a>
                   {m.viber ? ' · Viber' : ''}
                 </li>
               ))
@@ -510,16 +480,12 @@ const LOCATION_PHOTO = 'about/location-3.avif';
             {
               COMPANY.emails.map((e) => (
                 <li>
-                  <a class="hover:underline" href={`mailto:${e}`}>
-                    {e}
-                  </a>
+                  <a class="hover:underline" href={`mailto:${e}`}>{e}</a>
                 </li>
               ))
             }
             <li>
-              <a href={COMPANY.facebook} target="_blank" class="hover:underline"
-                >fb.com/cybertoneindsales</a
-              >
+              <a href={COMPANY.facebook} target="_blank" class="hover:underline">fb.com/cybertoneindsales</a>
             </li>
           </ul>
         </div>
@@ -530,59 +496,21 @@ const LOCATION_PHOTO = 'about/location-3.avif';
       </div>
     </div>
   </footer>
-  
-
 </Layout>
 
-<!-- Lightweight Lightbox (no deps) -->
 <style>
   .slim-scroll::-webkit-scrollbar { width: 8px; }
   .slim-scroll::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.15); border-radius: 9999px; }
   .dark .slim-scroll::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); }
 
-  .lb-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.8);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 60;
-  }
+  .lb-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); display: none; align-items: center; justify-content: center; z-index: 60; }
   .lb-backdrop.open { display: flex; }
-
-  .lb-img {
-    max-width: 92vw;
-    max-height: 92vh;
-    border-radius: 0.5rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  }
-  /* zoom-in on open */
+  .lb-img { max-width: 92vw; max-height: 92vh; border-radius: 0.5rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
   .lb-backdrop.open .lb-img { animation: lb-zoom 160ms ease-out; }
-  @keyframes lb-zoom {
-    from { transform: scale(0.96); opacity: 0.8; }
-    to   { transform: scale(1);    opacity: 1; }
-  }
-
-  /* controls */
-  .lb-btn {
-    position: absolute;
-    top: 1rem;
-    background: rgba(0,0,0,0.6);
-    color: white;
-    border: none;
-    padding: .5rem .75rem;
-    border-radius: .5rem;
-    cursor: pointer;
-    backdrop-filter: blur(4px);
-  }
+  @keyframes lb-zoom { from { transform: scale(0.96); opacity: 0.8; } to { transform: scale(1); opacity: 1; } }
+  .lb-btn { position: absolute; top: 1rem; background: rgba(0,0,0,0.6); color: white; border: none; padding: .5rem .75rem; border-radius: .5rem; cursor: pointer; backdrop-filter: blur(4px); }
   .lb-close { right: 1rem; font-size: 1.25rem; line-height: 1; }
-  .lb-arrow {
-    top: 50%;
-    transform: translateY(-50%);
-    padding: .6rem .8rem;
-    font-size: 1.1rem;
-  }
+  .lb-arrow { top: 50%; transform: translateY(-50%); padding: .6rem .8rem; font-size: 1.1rem; }
   .lb-prev { left: 1rem; }
   .lb-next { right: 1rem; }
 </style>
@@ -594,7 +522,6 @@ const LOCATION_PHOTO = 'about/location-3.avif';
   <button class="lb-btn lb-arrow lb-next" aria-label="Next (→)">▶</button>
 </div>
 
-
 <script>
   const lb = document.getElementById('lightbox');
   const lbImg = lb?.querySelector('.lb-img');
@@ -602,7 +529,6 @@ const LOCATION_PHOTO = 'about/location-3.avif';
   const btnPrev = lb?.querySelector('.lb-prev');
   const btnNext = lb?.querySelector('.lb-next');
 
-  // All clickable thumbnails
   const thumbs = Array.from(document.querySelectorAll('.js-lightbox'));
   let currentIndex = -1;
 
@@ -612,7 +538,6 @@ const LOCATION_PHOTO = 'about/location-3.avif';
     const src = thumbs[currentIndex].getAttribute('data-full') || thumbs[currentIndex].getAttribute('src');
     if (!src) return;
 
-    // Preload then reveal (lets the zoom animation feel smooth)
     const pre = new Image();
     pre.onload = () => {
       lbImg.src = src;
@@ -635,27 +560,21 @@ const LOCATION_PHOTO = 'about/location-3.avif';
   function next() { if (currentIndex > -1) openAt(currentIndex + 1); }
   function prev() { if (currentIndex > -1) openAt(currentIndex - 1); }
 
-  // Open when clicking a gallery image
   document.addEventListener('click', (e) => {
     const t = e.target;
     if (t && t.classList && t.classList.contains('js-lightbox')) {
       const clickedIndex = thumbs.indexOf(t);
       openAt(clickedIndex > -1 ? clickedIndex : 0);
     } else if (t === lb) {
-      // Click the dark backdrop to close
       closeLB();
     }
   });
 
-  // Click the enlarged photo to close (your requested behavior)
   lbImg?.addEventListener('click', closeLB);
-
-  // Buttons
   btnClose?.addEventListener('click', closeLB);
   btnNext?.addEventListener('click', next);
   btnPrev?.addEventListener('click', prev);
 
-  // Keyboard: Esc to close, ← → to navigate
   document.addEventListener('keydown', (e) => {
     if (!lb?.classList.contains('open')) return;
     if (e.key === 'Escape') { e.preventDefault(); closeLB(); }
