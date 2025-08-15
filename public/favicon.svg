@@ -1,16 +1,2 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background with rounded corners -->
-  <rect width="32" height="32" rx="8" fill="url(#gradient)" />
-  
-  <!-- SL Text -->
-  <text x="16" y="20" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">SL</text>
-  
-  <!-- Gradient definition -->
-  <defs>
-    <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#3B82F6"/> <!-- blue-500 -->
-      <stop offset="100%" stop-color="#9333EA"/> <!-- purple-600 -->
-    </linearGradient>
-  </defs>
-</svg>
+<?xml version="1.0" encoding="utf-8" ?>
+<svg baseProfile="full" height="805" version="1.1" viewBox="0 0 805 805" width="805" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs /><path d="M 469.0 610.5 L 467.5 597.0 L 469.5 520.0 L 589.5 456.0 L 369.5 454.0 L 370.0 198.5 L 447.0 198.5 L 500.0 233.5 L 695.5 348.0 L 544.0 348.5 L 447.0 291.5 L 447.0 378.5 L 732.0 378.5 L 739.5 392.0 L 743.5 405.0 L 744.5 428.0 L 740.5 445.0 L 730.5 464.0 L 714.0 480.5 L 469.0 610.5 Z" fill="rgb(82,100,189)" stroke="none" /><path d="M 348.0 610.5 L 288.0 580.5 L 101.0 479.5 L 86.5 465.0 L 79.5 454.0 L 72.5 433.0 L 71.5 415.0 L 73.5 402.0 L 79.5 386.0 L 89.5 371.0 L 102.0 359.5 L 296.0 240.5 L 349.0 203.5 L 349.5 301.0 L 209.0 387.5 L 203.5 394.0 L 197.5 409.0 L 198.5 429.0 L 203.5 440.0 L 210.0 447.5 L 346.5 520.0 L 348.0 610.5 Z" fill="rgb(82,100,189)" stroke="none" /><path d="M 430.5 260.0 L 430.0 229.5 L 398.5 230.0 L 399.0 260.5 L 430.5 260.0 Z" fill="rgb(82,100,189)" stroke="none" /><path d="M 371.0 623.5 L 369.5 478.0 L 446.0 477.5 L 446.5 622.0 L 371.0 623.5 Z" fill="rgb(82,100,189)" stroke="none" /></svg>
